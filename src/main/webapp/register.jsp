@@ -7,7 +7,7 @@
 <title>Registration</title>
 </head>
 <body>
-	<h1>Guru Register Form</h1>
+	<h1>Register Form</h1>
 <form action="Registration" method="post">
 			<table style="with: 50%">
 				<tr>

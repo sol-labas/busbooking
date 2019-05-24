@@ -1,23 +1,24 @@
 package angela.kuznetsova.assignment2;
 
 public class Booking {
-	private User user;
-	private Route route;
+	private long id;
+	private long userId;
+	private long routeId;
 	private int numberOfSeats;
 	private double price;
 	
-	 
-	public User getUser() {
-		return user;
+
+	public long getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
-	public Route getRoute() {
-		return route;
+	public long getRouteId() {
+		return routeId;
 	}
-	public void setRoute(Route route) {
-		this.route = route;
+	public void setRouteId(long routeId) {
+		this.routeId = routeId;
 	}
 	public int getNumberOfSeats() {
 		return numberOfSeats;
@@ -31,19 +32,25 @@ public class Booking {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "Booking [user=" + user + ", route=" + route + ", numberOfSeats=" + numberOfSeats + ", price=" + price
-				+ "]";
+		return "Booking [id=" + id + ", userId=" + userId + ", routeId=" + routeId + ", numberOfSeats=" + numberOfSeats
+				+ ", price=" + price + "]";
 	}
-	public Booking(User user, Route route, int numberOfSeats, double price) {
+	public Booking(long id, long userId, long routeId, int numberOfSeats, double price) {
 		super();
-		this.user = user;
-		this.route = route;
+		this.id = id;
+		this.userId = userId;
+		this.routeId = routeId;
 		this.numberOfSeats = numberOfSeats;
 		this.price = price;
 	}
-	
 	
 
 

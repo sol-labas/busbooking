@@ -2,12 +2,17 @@ package angela.kuznetsova.assignment2.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import angela.kuznetsova.assignment2.User;
+import angela.kuznetsova.assignment2.UserDAO;
 
 public class Login extends HttpServlet {
 	
@@ -15,21 +20,49 @@ public class Login extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.sendRedirect("login.jsp");
+	}
  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if(username.isEmpty() || password.isEmpty() )
-		{
-			RequestDispatcher req = request.getRequestDispatcher("register.jsp");
-			req.include(request, response);
+		UserDAO newUserDAO = new UserDAO();
+		
+		try {
+			User user = newUserDAO.getUserByLogin(username);
+			if (user != null) {
+				if (user.getPassword().equals(password)) {
+					HttpSession session=request.getSession();
+					session.setAttribute("role", user.getRole());
+					session.setAttribute("id", user.getId());
+			        
+					if(user.getRole().equals(User.ADMIN)) {
+						System.out.println("Logged in as admin");
+						response.sendRedirect("admin/index.jsp");
+					}
+					if(user.getRole().equals(User.USER)) {
+						System.out.println("Logged in as user");
+						response.sendRedirect("user/index.jsp");
+					}
+				} else {
+					System.out.println("Wrong password");
+				}
+			} else {
+				System.out.println("User not found");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		else
-		{
-			RequestDispatcher req = request.getRequestDispatcher("register.jsp");
-			req.forward(request, response);
-		}
+
+		RequestDispatcher req = request.getRequestDispatcher("login.jsp");
+		request.setAttribute("error", "Incorrect credentials");
+		req.include(request, response);
 	}
  
 

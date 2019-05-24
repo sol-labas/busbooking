@@ -1,6 +1,10 @@
 package angela.kuznetsova.assignment2;
 
 public class User {
+	public static final String USER = "user";
+	public static final String ADMIN = "admin";
+	
+	private long id;
 	private String firstName;
 	private String lastName;
 	private String username;
@@ -37,20 +41,27 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	@Override
-	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", password="
-				+ password + ", role=" + role + "]";
+	public long getId() {
+		return id;
 	}
-	public User(String firstName, String lastName, String username, String password, String role) {
+	public void setId(long id) {
+		this.id = id;
+	}
+	public User(long id, String firstName, String lastName, String username, String password, String role) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
 		this.role = role;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", role=" + role + "]";
+	}
+	
 	
 	
 
