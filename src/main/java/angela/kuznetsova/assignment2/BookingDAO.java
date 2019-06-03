@@ -14,7 +14,7 @@ public class BookingDAO {
 	public void insert(Booking booking) throws SQLException {
 		Connection conn = SQLConnection.get();
 
-		String query = "insert into booking (route_id, number_places, user_id) values (?, ?, ?, ?)";
+		String query = "insert into booking (route_id, number_places, price, user_id) values (?, ?, ?, ?)";
 
 		PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -67,7 +67,7 @@ public class BookingDAO {
 	public List<Booking> getByUserID (long userid) throws SQLException {
 		Connection conn = SQLConnection.get();
 
-		String query = "select * from booking where login = ? ;";
+		String query = "select * from booking where user_id = ?";
 
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setLong(1, userid);
@@ -92,6 +92,35 @@ public class BookingDAO {
 			
 		return bookings;
 			
+	}
+	
+	
+	public void delete(long bookingId) throws SQLException {
+		Connection conn = SQLConnection.get();
+
+		String query = "delete from booking where id = ?";
+
+		PreparedStatement stmt = conn.prepareStatement(query);
+
+		stmt.setLong(1, bookingId);
+		stmt.executeUpdate();
+
+		stmt.close();
+		conn.close();
+	}
+	
+	public void deleteByUserId(long userId) throws SQLException {
+		Connection conn = SQLConnection.get();
+
+		String query = "delete from booking where user_id = ?";
+
+		PreparedStatement stmt = conn.prepareStatement(query);
+
+		stmt.setLong(1, userId);
+		stmt.executeUpdate();
+
+		stmt.close();
+		conn.close();
 	}
 
 }

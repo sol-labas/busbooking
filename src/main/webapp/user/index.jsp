@@ -9,8 +9,7 @@
 <% if (session.getAttribute("role") != null && session.getAttribute("role").equals("user")) { %>
     <h2>Welcome to Bus bookings</h2>
     <ul>
-    	<li><a href="Bookings">Your bookings</a></li>
-    	<li><a href="AddBooking">Add booking</a></li>
+    	<li><a href="account.jsp">Manage your bookings</a></li>
     	<li><a href="../Logout">Logout</a></li>
     </ul>
 <% } else { %>    

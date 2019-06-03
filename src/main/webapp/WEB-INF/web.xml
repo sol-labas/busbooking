@@ -49,12 +49,45 @@
 	</servlet-mapping>
 	
 	<servlet>
-	   <servlet-name>Route</servlet-name>
-	   <servlet-class>angela.kuznetsova.assignment2.servlet.Route</servlet-class>
+	   <servlet-name>AddRoute</servlet-name>
+	   <servlet-class>angela.kuznetsova.assignment2.servlet.AddRoute</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-	   <servlet-name>Route</servlet-name>
-	   <url-pattern>/admin/route</url-pattern>
+	   <servlet-name>AddRoute</servlet-name>
+	   <url-pattern>/admin/AddRoute</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+	   <servlet-name>DeleteUser</servlet-name>
+	   <servlet-class>angela.kuznetsova.assignment2.servlet.DeleteUser</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	   <servlet-name>DeleteBookingAdmin</servlet-name>
+	   <url-pattern>/admin/DeleteBookingAdmin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	   <servlet-name>DeleteBookingAdmin</servlet-name>
+	   <servlet-class>angela.kuznetsova.assignment2.servlet.DeleteBookingAdmin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	   <servlet-name>DeleteUser</servlet-name>
+	   <url-pattern>/admin/DeleteUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	   <servlet-name>AddBooking</servlet-name>
+	   <servlet-class>angela.kuznetsova.assignment2.servlet.AddBooking</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	   <servlet-name>AddBooking</servlet-name>
+	   <url-pattern>/user/AddBooking</url-pattern>
+	</servlet-mapping>
+	
+	
 </web-app>

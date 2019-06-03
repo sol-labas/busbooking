@@ -1,5 +1,8 @@
 package angela.kuznetsova.assignment2;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public class User {
 	public static final String USER = "user";
 	public static final String ADMIN = "admin";
@@ -62,8 +65,17 @@ public class User {
 				+ ", password=" + password + ", role=" + role + "]";
 	}
 	
+	public static boolean isSessionAdmin(HttpServletRequest request) {
+		HttpSession session = request.getSession(); 
+		return (session.getAttribute("role") != null && session.getAttribute("role").equals("admin"));
+			 
+	}
 	
-	
+	public static boolean isSessionUser(HttpServletRequest request) {
+		HttpSession session = request.getSession(); 
+		return (session.getAttribute("role") != null && session.getAttribute("role").equals("user"));
+			 
+	}
 
 
 

@@ -18,7 +18,7 @@ public class RouteDAO {
 
 		PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-		stmt.setString(1, route.getSource() );
+		stmt.setString(1, route.getSource());
 		stmt.setString(2, route.getDestination());
 		stmt.setInt(3, route.getNumberOfSeats());
 		stmt.setDouble(4, route.getPricePerSeat());
@@ -35,15 +35,15 @@ public class RouteDAO {
 		stmt.close();
 		conn.close();
 	}
-	
-	public List<Route> getAll () throws SQLException {
+
+	public List<Route> getAll() throws SQLException {
 		Connection conn = SQLConnection.get();
 
 		String query = "select * from route";
 
 		PreparedStatement stmt = conn.prepareStatement(query);
 		ResultSet rs = stmt.executeQuery();
-		
+
 		List<Route> routes = new ArrayList<Route>();
 
 		while (rs.next()) {
@@ -54,16 +54,59 @@ public class RouteDAO {
 			int number_places = rs.getInt("number_places");
 			double price = rs.getDouble("price");
 			Date depart_time = rs.getTimestamp("depart_time");
-			
+
 			routes.add(new Route(id, source, destination, number_places, price, depart_time));
 		}
-		
-		
+
 		stmt.close();
 		conn.close();
-			
+
 		return routes;
-			
+
+	}
+
+	public Route getRoutebyId(long routeId) throws SQLException {
+		Connection conn = SQLConnection.get();
+
+		String query = "select * from route where id = ?";
+
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setLong(1, routeId);
+		ResultSet rs = stmt.executeQuery();
+
+		Route route = null;
+
+		while (rs.next()) {
+
+			Long id = rs.getLong("id");
+			String source = rs.getString("source");
+			String destination = rs.getString("destination");
+			int number_places = rs.getInt("number_places");
+			double price = rs.getDouble("price");
+			Date depart_time = rs.getTimestamp("depart_time");
+
+			route = new Route(id, source, destination, number_places, price, depart_time);
+		}
+
+		stmt.close();
+		conn.close();
+
+		return route;
+
 	}
 	
+	public void delete(long routeId) throws SQLException {
+		Connection conn = SQLConnection.get();
+
+		String query = "delete * from route where id = ?";
+
+		PreparedStatement stmt = conn.prepareStatement(query);
+
+		stmt.setLong(1, routeId);
+		stmt.executeUpdate();
+
+		stmt.close();
+		conn.close();
+	}
+
 }

@@ -15,7 +15,7 @@ import angela.kuznetsova.assignment2.UserDAO;
 
 public class Registration extends HttpServlet {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String firstName = request.getParameter("first_name");
