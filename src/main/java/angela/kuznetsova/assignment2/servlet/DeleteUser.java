@@ -43,7 +43,7 @@ public class DeleteUser extends HttpServlet{
 
 		try {
 			userDAO.delete(user_id);
-			bookingDAO.deleteByUserId(user_id);
+			bookingDAO.deleteAllUser(user_id);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

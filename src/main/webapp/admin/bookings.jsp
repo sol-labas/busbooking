@@ -42,6 +42,8 @@
 		<td><%=route.getSource()%></td>
 		<td><%=route.getDestination()%></td>
 		<td><%=route.getDate()%></td>
+		<td><%=booking.getNumberOfSeats()%></td>
+		<td><%=booking.getPrice()%></td>
 		<td><%=user.getFirstName()%></td>
 		<td><%=user.getLastName()%></td>
 	</tr>

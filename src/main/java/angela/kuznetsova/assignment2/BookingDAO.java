@@ -109,7 +109,22 @@ public class BookingDAO {
 		conn.close();
 	}
 	
-	public void deleteByUserId(long userId) throws SQLException {
+	public void deleteByUser(long bookingId, long userId) throws SQLException {
+		Connection conn = SQLConnection.get();
+
+		String query = "delete from booking where user_id = ? and id = ?";
+
+		PreparedStatement stmt = conn.prepareStatement(query);
+
+		stmt.setLong(1, userId);
+		stmt.setLong(2, bookingId);
+		stmt.executeUpdate();
+
+		stmt.close();
+		conn.close();
+	}
+	
+	public void deleteAllUser(long userId) throws SQLException {
 		Connection conn = SQLConnection.get();
 
 		String query = "delete from booking where user_id = ?";
@@ -122,5 +137,4 @@ public class BookingDAO {
 		stmt.close();
 		conn.close();
 	}
-
 }

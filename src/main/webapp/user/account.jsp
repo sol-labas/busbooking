@@ -103,7 +103,7 @@
 						<option value="<%=booking.getId()%>">
 							<%=route.getSource()%> -
 							<%=route.getDestination()%> on
-							<%=route.getDate()%>, $<%=route.getPricePerSeat()%>
+							<%=route.getDate()%>, $<%=booking.getPrice() %>
 						</option>
 						<%
 							}

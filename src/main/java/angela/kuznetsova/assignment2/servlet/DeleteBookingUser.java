@@ -46,8 +46,8 @@ public class DeleteBookingUser extends HttpServlet{
 		
 		
 		try {
-			if()
-			bookingDAO.delete(booking_id);
+
+			bookingDAO.deleteByUser(booking_id, user_id); 
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
