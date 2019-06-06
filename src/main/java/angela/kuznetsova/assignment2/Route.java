@@ -3,18 +3,23 @@ package angela.kuznetsova.assignment2;
 import java.util.Date;
 
 public class Route {
+	
+	//fields
 	private long id;
+	private String source;
+	private String destination;
+	private int numberOfSeats;
+	private double pricePerSeat;
+	private Date date;
+	
+	//getters and setters
+	
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	private String source;
-	private String destination;
-	private int numberOfSeats;
-	private double pricePerSeat;
-	private Date date;
 	public String getSource() {
 		return source;
 	}
@@ -45,6 +50,9 @@ public class Route {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	//constractor
+	
 	public Route(long id, String source, String destination, int numberOfSeats, double pricePerSeat, Date date) {
 		super();
 		this.id = id;

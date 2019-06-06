@@ -15,10 +15,12 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//canceling current session
+		
 		HttpSession session = request.getSession();
 		session.invalidate();
 		System.out.println("Logged out");
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.jsp"); //rediraction to main page
 		
 	}
 

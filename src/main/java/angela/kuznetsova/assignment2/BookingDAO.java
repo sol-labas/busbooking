@@ -11,6 +11,8 @@ import java.util.List;
 
 public class BookingDAO {
 	
+	//inserting data about booking into DB
+	
 	public void insert(Booking booking) throws SQLException {
 		Connection conn = SQLConnection.get();
 
@@ -34,6 +36,8 @@ public class BookingDAO {
 		stmt.close();
 		conn.close();
 	}
+	
+	//get information about all bookings
 	
 	public List<Booking> getAll () throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -63,6 +67,8 @@ public class BookingDAO {
 		return bookings;
 			
 	}
+	
+	//get information about bookings which belong to user
 	
 	public List<Booking> getByUserID (long userid) throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -94,6 +100,7 @@ public class BookingDAO {
 			
 	}
 	
+	//delete booking by its ID number
 	
 	public void delete(long bookingId) throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -108,6 +115,8 @@ public class BookingDAO {
 		stmt.close();
 		conn.close();
 	}
+	
+	//delete specific booking which belong to specific user
 	
 	public void deleteByUser(long bookingId, long userId) throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -124,6 +133,8 @@ public class BookingDAO {
 		conn.close();
 	}
 	
+	//delete all bookings which belongs to specific user
+	
 	public void deleteAllUser(long userId) throws SQLException {
 		Connection conn = SQLConnection.get();
 
@@ -132,6 +143,22 @@ public class BookingDAO {
 		PreparedStatement stmt = conn.prepareStatement(query);
 
 		stmt.setLong(1, userId);
+		stmt.executeUpdate();
+
+		stmt.close();
+		conn.close();
+	}
+	
+	//delete bookings while deleting route
+	
+	public void deleteAllRoute(long routeId) throws SQLException {
+		Connection conn = SQLConnection.get();
+
+		String query = "delete from booking where route_id = ?";
+
+		PreparedStatement stmt = conn.prepareStatement(query);
+
+		stmt.setLong(1, routeId);
 		stmt.executeUpdate();
 
 		stmt.close();

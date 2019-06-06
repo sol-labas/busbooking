@@ -1,13 +1,15 @@
 package angela.kuznetsova.assignment2;
 
 public class Booking {
+	
+	//fields
 	private long id;
 	private long userId;
 	private long routeId;
 	private int numberOfSeats;
 	private double price;
 	
-
+	//getters and setters
 	public long getUserId() {
 		return userId;
 	}
@@ -43,6 +45,8 @@ public class Booking {
 		return "Booking [id=" + id + ", userId=" + userId + ", routeId=" + routeId + ", numberOfSeats=" + numberOfSeats
 				+ ", price=" + price + "]";
 	}
+	
+	//constractor
 	public Booking(long id, long userId, long routeId, int numberOfSeats, double price) {
 		super();
 		this.id = id;

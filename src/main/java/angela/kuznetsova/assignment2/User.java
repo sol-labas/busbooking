@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class User {
+	
+	//fields
 	public static final String USER = "user";
 	public static final String ADMIN = "admin";
 	
@@ -14,6 +16,7 @@ public class User {
 	private String password;
 	private String role;
 	
+	//getters and setters
 	public String getFirstName() {
 		return firstName;
 	}
@@ -50,6 +53,7 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
+	//constractor
 	public User(long id, String firstName, String lastName, String username, String password, String role) {
 		super();
 		this.id = id;
@@ -65,11 +69,14 @@ public class User {
 				+ ", password=" + password + ", role=" + role + "]";
 	}
 	
+	//checking the user role is admin
 	public static boolean isSessionAdmin(HttpServletRequest request) {
 		HttpSession session = request.getSession(); 
 		return (session.getAttribute("role") != null && session.getAttribute("role").equals("admin"));
 			 
 	}
+	
+	//checking the user role is user
 	
 	public static boolean isSessionUser(HttpServletRequest request) {
 		HttpSession session = request.getSession(); 

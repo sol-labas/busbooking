@@ -23,9 +23,9 @@ public class Registration extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		// TODO: Check if no users (first user created - then use ADMIN role
+		//servlet gets information about user from jsp page and sent it to DB using userDAO.insert
 		
-		User user = new User(0, firstName, lastName, username, password, User.USER);
+		User user = new User(0, firstName, lastName, username, password, User.USER); //admin created manually
 		UserDAO userDAO = new UserDAO();
 		try {
 			userDAO.insert(user);
@@ -34,7 +34,7 @@ public class Registration extends HttpServlet {
 			throw new ServletException("Could not save user");
 		}
 
-		RequestDispatcher req = request.getRequestDispatcher("registerok.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("registerok.jsp"); 
 		req.forward(request, response);
 	}
 }

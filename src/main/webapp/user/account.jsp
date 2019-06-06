@@ -10,6 +10,7 @@
 <title>Account</title>
 </head>
 <body>
+	<!-- checking user and its role -->
 	<%
 		if (session.getAttribute("role") != null && session.getAttribute("role").equals("user")) {
 	%>
@@ -24,10 +25,11 @@
 			<th>Number of Places</th>
 			<th>Price, $</th>
 		</tr>
+		<!-- get information about users bookings -->
 		<%
 			BookingDAO bookingDAO = new BookingDAO();
 				RouteDAO routeDAO = new RouteDAO();
-				for (Booking booking : bookingDAO.getByUserID((Long)session.getAttribute("id"))) {
+				for (Booking booking : bookingDAO.getByUserID((Long) session.getAttribute("id"))) {
 					Route route = routeDAO.getRoutebyId(booking.getRouteId());
 		%>
 		<tr>
@@ -42,6 +44,7 @@
 			}
 		%>
 	</table>
+	<!-- add booking -->
 	<form action="AddBooking" method="post">
 		<h1>Add Booking</h1>
 
@@ -87,8 +90,7 @@
 			</td>
 		</tr>
 	</table>
-
-	</table>
+	<!-- delete booking -->
 	<form action="DeleteBookingUser" method="post">
 		<h1>Delete Booking</h1>
 
@@ -98,12 +100,12 @@
 				<td><select name="bookingid">
 						<%
 							for (Booking booking : bookingDAO.getByUserID((Long) session.getAttribute("id"))) {
-								Route route = routeDAO.getRoutebyId(booking.getRouteId());
+									Route route = routeDAO.getRoutebyId(booking.getRouteId());
 						%>
 						<option value="<%=booking.getId()%>">
 							<%=route.getSource()%> -
 							<%=route.getDestination()%> on
-							<%=route.getDate()%>, $<%=booking.getPrice() %>
+							<%=route.getDate()%>, $<%=booking.getPrice()%>
 						</option>
 						<%
 							}
@@ -118,8 +120,9 @@
 	<table>
 		<tr>
 			<td colspan="2" style="color: red;">
+			<!-- if success we see message-->
 				<%
-				if ((String) request.getAttribute("successDelete") != null) {
+					if ((String) request.getAttribute("successDelete") != null) {
 				%> <%=(String) request.getAttribute("successDelete")%> <%
  	}
  %>

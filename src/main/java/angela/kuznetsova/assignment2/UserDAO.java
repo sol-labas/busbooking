@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 public class UserDAO {
+	
+	//insert in DB data about user
 
 	public void insert(User user) throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -35,6 +37,7 @@ public class UserDAO {
 		stmt.close();
 		conn.close();
 	}
+	//get information about all users
 	
 	public List<User> getAll() throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -64,6 +67,7 @@ public class UserDAO {
 		return users;
 
 	}
+	//get information about user by login/username
 	
 	public User getUserByLogin (String username) throws SQLException {
 		Connection conn = SQLConnection.get();
@@ -95,6 +99,8 @@ public class UserDAO {
 		
 	}
 	
+	//get information about user by ID
+	
 	public User getUserById (long userId) throws SQLException {
 		Connection conn = SQLConnection.get();
 
@@ -124,6 +130,8 @@ public class UserDAO {
 		return user;
 		
 	}
+	
+	//delete user by ID
 	
 	public void delete(long userId) throws SQLException {
 		Connection conn = SQLConnection.get();

@@ -30,12 +30,14 @@ public class AddBooking extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.sendRedirect("account.jsp");
+		response.sendRedirect("account.jsp"); //redirection to correct jsp page
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//checking is user has admin rights otherwise send to login page 
+		
 		if (!User.isSessionUser(request)) {
 			RequestDispatcher req = request.getRequestDispatcher("../login.jsp");
 			request.setAttribute("error", "Incorrect credentials");
@@ -43,6 +45,8 @@ public class AddBooking extends HttpServlet {
 			return;
 		}
 
+		//servlet gets information about booking from jsp page and sent it to DB using bookingDAO.insert
+		
 		try {
 			HttpSession session = request.getSession();
 			Long user_id = (long) session.getAttribute("id");
@@ -65,7 +69,7 @@ public class AddBooking extends HttpServlet {
 		}
 
 		RequestDispatcher req = request.getRequestDispatcher("account.jsp");
-		request.setAttribute("successAdd", "Booking was sucsessfully add");
+		request.setAttribute("successAdd", "Booking was successfully added");
 		req.include(request, response);
 	}
 

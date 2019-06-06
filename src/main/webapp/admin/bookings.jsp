@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import ="angela.kuznetsova.assignment2.BookingDAO" 
-	import ="angela.kuznetsova.assignment2.Booking"
+	pageEncoding="UTF-8" import="angela.kuznetsova.assignment2.BookingDAO"
+	import="angela.kuznetsova.assignment2.Booking"
 	import="angela.kuznetsova.assignment2.Route"
 	import="angela.kuznetsova.assignment2.RouteDAO"
 	import="angela.kuznetsova.assignment2.User"
-	import="angela.kuznetsova.assignment2.UserDAO"
-	%>
+	import="angela.kuznetsova.assignment2.UserDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +12,8 @@
 <title>Bookings</title>
 </head>
 <body>
+
+	 <!-- checking is user has admin role -->
 	<%
 		if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 	%>
@@ -29,27 +30,31 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 		</tr>
-	<%
-		BookingDAO bookingDAO = new BookingDAO();
-			RouteDAO routeDAO = new RouteDAO();
-			UserDAO userDAO = new UserDAO();
-			for (Booking booking : bookingDAO.getAll()) {
-				Route route = routeDAO.getRoutebyId(booking.getRouteId());
-				User user = userDAO.getUserById(booking.getUserId());
-	%>
-	<tr>
-		<td><%=booking.getId()%></td>
-		<td><%=route.getSource()%></td>
-		<td><%=route.getDestination()%></td>
-		<td><%=route.getDate()%></td>
-		<td><%=booking.getNumberOfSeats()%></td>
-		<td><%=booking.getPrice()%></td>
-		<td><%=user.getFirstName()%></td>
-		<td><%=user.getLastName()%></td>
-	</tr>
-	<%
-		}
-	%>
+		
+		<!-- get information about all bookings -->
+		<%
+			BookingDAO bookingDAO = new BookingDAO();
+				RouteDAO routeDAO = new RouteDAO();
+				UserDAO userDAO = new UserDAO();
+				for (Booking booking : bookingDAO.getAll()) {
+					Route route = routeDAO.getRoutebyId(booking.getRouteId());
+					User user = userDAO.getUserById(booking.getUserId());
+					if (user != null && route != null) {
+		%>
+		<tr>
+			<td><%=booking.getId()%></td>
+			<td><%=route.getSource()%></td>
+			<td><%=route.getDestination()%></td>
+			<td><%=route.getDate()%></td>
+			<td><%=booking.getNumberOfSeats()%></td>
+			<td><%=booking.getPrice()%></td>
+			<td><%=user.getFirstName()%></td>
+			<td><%=user.getLastName()%></td>
+		</tr>
+		<%
+			    }
+			}
+		%>
 	</table>
 	<form action="DeleteBookingAdmin" method="post">
 		<h1>Delete Booking</h1>
@@ -58,16 +63,19 @@
 			<tr>
 				<th>Booking</th>
 				<td><select name="bookingid">
+				<!-- get information about all bookings can be deleted-->
 						<%
 							for (Booking booking : bookingDAO.getAll()) {
-								Route route = routeDAO.getRoutebyId(booking.getRouteId());
-								User user = userDAO.getUserById(booking.getUserId());
+									Route route = routeDAO.getRoutebyId(booking.getRouteId());
+									User user = userDAO.getUserById(booking.getUserId());
 						%>
 						<option value="<%=booking.getId()%>">
+							<%=booking.getId()%>
 							<%=route.getSource()%> -
 							<%=route.getDestination()%> on
-							<%=route.getDate()%>, $<%=route.getPricePerSeat()%>
-							booked by <%=user.getFirstName()%> <%=user.getLastName()%> 
+							<%=route.getDate()%>, $<%=booking.getPrice()%> booked by
+							<%=user.getFirstName()%>
+							<%=user.getLastName()%>
 						</option>
 						<%
 							}
@@ -80,14 +88,14 @@
 
 	</form>
 	<table>
-	<tr>
+		<tr>
 			<td colspan="2" style="color: red;">
+			<!-- if success we see message-->
 				<%
 					if ((String) request.getAttribute("success") != null) {
-				%> <%=(String) request.getAttribute("success")%>
-				<%
-					}
-				%>
+				%> <%=(String) request.getAttribute("success")%> <%
+ 	}
+ %>
 			</td>
 		</tr>
 	</table>
@@ -99,5 +107,6 @@
 	<%
 		}
 	%>
+
 </body>
 </html>

@@ -26,11 +26,13 @@ public class DeleteBookingUser extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.sendRedirect("account.jsp");
+		response.sendRedirect("account.jsp"); //redirection to correct jsp page
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//checking is real user and has user role
 		
 		if (!User.isSessionUser(request)) {
 			RequestDispatcher req = request.getRequestDispatcher("../login.jsp");
@@ -38,6 +40,8 @@ public class DeleteBookingUser extends HttpServlet{
 			req.include(request, response);
 			return;
 		}
+		
+		//servlet gets information about booking (ID and user ID) from jsp page and delete it from DB using bookingDAO.delete
 		
 		HttpSession session = request.getSession();
 		Long user_id = (long)session.getAttribute("id");
@@ -55,7 +59,7 @@ public class DeleteBookingUser extends HttpServlet{
 		}
 			
 		RequestDispatcher req = request.getRequestDispatcher("account.jsp");
-		request.setAttribute("success", "Booking was sucsessfully deteted");
+		request.setAttribute("successDelete", "Booking was successfully deteted");
 		req.include(request, response); 
 		//response.sendRedirect("bookings.jsp");	
 	}

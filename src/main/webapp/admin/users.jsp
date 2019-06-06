@@ -8,6 +8,8 @@
 <title>User Management</title>
 </head>
 <body>
+<!-- checking is user has admin role -->
+
 	<%
 		if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 	%>
@@ -20,6 +22,7 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 		</tr>
+		<!-- get information about all users -->
 		<%
 			UserDAO userDAO = new UserDAO();
 				for (User user : userDAO.getAll()) {
@@ -34,8 +37,9 @@
 			}
 		%>
 	</table>
+	<!-- delete user -->
 	<form action="DeleteUser" method="post">
-		<h1>Delete Booking</h1>
+		<h1>Delete User</h1>
 
 		<table style="with: 50%">
 			<tr>
@@ -61,6 +65,7 @@
 	<table>
 	<tr>
 			<td colspan="2" style="color: red;">
+			<!-- if success we see message-->
 				<%
 					if ((String) request.getAttribute("success") != null) {
 				%> <%=(String) request.getAttribute("success")%>

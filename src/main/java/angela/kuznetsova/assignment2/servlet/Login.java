@@ -24,10 +24,13 @@ public class Login extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("login.jsp"); //redirection to correct jsp page
 	}
  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//checking credential and user role
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		UserDAO newUserDAO = new UserDAO();
@@ -37,16 +40,16 @@ public class Login extends HttpServlet {
 			if (user != null) {
 				if (user.getPassword().equals(password)) {
 					HttpSession session=request.getSession();
-					session.setAttribute("role", user.getRole());
-					session.setAttribute("id", user.getId());
+					session.setAttribute("role", user.getRole()); //set role
+					session.setAttribute("id", user.getId()); //set user id 
 			        
 					if(user.getRole().equals(User.ADMIN)) {
 						System.out.println("Logged in as admin");
-						response.sendRedirect("admin/index.jsp");
+						response.sendRedirect("admin/index.jsp"); //redirection to admin page if admin
 					}
 					if(user.getRole().equals(User.USER)) {
 						System.out.println("Logged in as user");
-						response.sendRedirect("user/index.jsp");
+						response.sendRedirect("user/index.jsp"); //redirection to user page if user
 					}
 				} else {
 					System.out.println("Wrong password");
@@ -61,7 +64,7 @@ public class Login extends HttpServlet {
 		}
 
 		RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-		request.setAttribute("error", "Incorrect credentials");
+		request.setAttribute("error", "Incorrect credentials"); //show error
 		req.include(request, response);
 	}
  

@@ -30,11 +30,13 @@ public class AddRoute extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.sendRedirect("routes.jsp");
+		response.sendRedirect("routes.jsp"); //redirection to correct jsp page
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//checking is user has admin rights otherwise send to login page 
 		
 		if (!User.isSessionAdmin(request)) {
 			RequestDispatcher req = request.getRequestDispatcher("../login.jsp");
@@ -42,6 +44,8 @@ public class AddRoute extends HttpServlet {
 			req.include(request, response);
 			return;
 		}
+		
+		//servlet gets information about route from jsp page and sent it to DB using routeDAO.insert
 		
 		String source = request.getParameter("source");
 		String destination = request.getParameter("destination");
@@ -64,7 +68,9 @@ public class AddRoute extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException("Could not save route");
 		}
-		response.sendRedirect("routes.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("routes.jsp");
+		request.setAttribute("successAdd", "Route was successfully added");
+		req.include(request, response);
 	}
 
 }

@@ -11,6 +11,8 @@ import java.util.List;
 
 public class RouteDAO {
 
+	//insert in DB data about route
+	
 	public void insert(Route route) throws SQLException {
 		Connection conn = SQLConnection.get();
 
@@ -36,6 +38,8 @@ public class RouteDAO {
 		conn.close();
 	}
 
+	//get information about all routes
+	
 	public List<Route> getAll() throws SQLException {
 		Connection conn = SQLConnection.get();
 
@@ -65,6 +69,7 @@ public class RouteDAO {
 
 	}
 
+	//get specific route by ID 
 	public Route getRoutebyId(long routeId) throws SQLException {
 		Connection conn = SQLConnection.get();
 
@@ -95,10 +100,12 @@ public class RouteDAO {
 
 	}
 	
+	//delete specific route by ID
+	
 	public void delete(long routeId) throws SQLException {
 		Connection conn = SQLConnection.get();
 
-		String query = "delete * from route where id = ?";
+		String query = "delete from route where id = ?";
 
 		PreparedStatement stmt = conn.prepareStatement(query);
 

@@ -10,7 +10,7 @@ public class SQLConnection {
 	static final String uname = "root";
 	static final String password = "";
 	
-	//private static Connection myCon = null;
+	//establishing connection
 
 	public static Connection get() throws SQLException {
 		try {
